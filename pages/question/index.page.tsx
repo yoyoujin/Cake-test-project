@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 interface Question {
   id: number;
@@ -7,8 +8,11 @@ interface Question {
 }
 
 const QuestionPage: React.FC = () => {
+  const [selectedAnswer, setSelectedAnswer] = useRecoilState(selectedAnswerAtom);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
+
+  console.log(selectedAnswer);
 
   useEffect(() => {
     const fetchQuestion = async () => {
