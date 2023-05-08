@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
 
 // 선택된 답변
-const selectedAnswerAtom = atom<string | null>({
+export const selectedAnswerAtom = atom<string | string[]>({
   key: 'selectedAnswer',
-  default: null,
+  default: [],
 });
 
 // 최종 MBTI 유형 정보를 나타내는 atom
@@ -17,5 +17,3 @@ const selectedAnswerAtom = atom<string | null>({
 //   key: 'username',
 //   default: '',
 // });
-
-export default selectedAnswerAtom;
