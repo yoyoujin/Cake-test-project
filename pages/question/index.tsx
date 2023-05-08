@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { selectedAnswerAtom } from '@/recoil/atoms';
 import Router, { useRouter } from 'next/router';
+import { Progress, Grid } from '@nextui-org/react';
 
 interface Question {
   id: number;
@@ -23,9 +24,9 @@ const QuestionPage: React.FC = () => {
 
     console.log(currentQuestionIdx);
     console.log(questions.length);
-    if (currentQuestionIdx + 1 >= questions.length) {
-      router.push('/result');
-    }
+    // if (currentQuestionIdx + 1 >= questions.length) {
+    //   router.push('/result');
+    // }
   };
 
   useEffect(() => {
@@ -49,6 +50,11 @@ const QuestionPage: React.FC = () => {
 
   return (
     <div>
+      <Grid.Container xs={12} sm={6} gap={2}>
+        <Grid>
+          <Progress value={90} color='warning' />
+        </Grid>
+      </Grid.Container>
       <p>{currentQuestion.question}</p>
       <ul>
         {currentQuestion.options.map((option) => (
@@ -62,3 +68,7 @@ const QuestionPage: React.FC = () => {
 };
 
 export default QuestionPage;
+
+// 문제 끝났을 경우 -> ResultPage 보여주기 아니면 OR 마지막 문제일경우 결과보러가기 버튼 추가해줘서 result 페이지로 이동
+
+// 문제 진척율? 상태바 보여주기
