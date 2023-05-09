@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
 // 선택된 답변
-export const selectedAnswerAtom = atom<string | string[]>({
+export const selectedAnswerAtom = atom<string[]>({
   key: 'selectedAnswer',
   default: [],
 });

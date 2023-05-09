@@ -19,15 +19,17 @@ const QuestionPage: React.FC = () => {
   const router = useRouter();
 
   const handleAnswerSelection = (selectedOption: string) => {
-    setSelectedAnswer(selectedOption);
-    setCurrentQuestionIdx((prevIndex) => prevIndex + 1);
-
-    console.log(currentQuestionIdx);
-    console.log(questions.length);
-    // if (currentQuestionIdx + 1 >= questions.length) {
-    //   router.push('/result');
-    // }
+    setSelectedAnswer([...selectedAnswer, selectedOption]);
+    if (currentQuestionIdx < 11) {
+      setCurrentQuestionIdx((prevIndex) => prevIndex + 1);
+    }
   };
+
+  const handleResultPageRedirect = () => {
+    router.push('/result');
+  };
+
+  console.log(selectedAnswer);
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -49,10 +51,10 @@ const QuestionPage: React.FC = () => {
   }
 
   return (
-    <div>
-      <Grid.Container xs={12} sm={6} gap={2}>
+    <>
+      <Grid.Container xs={10} sm={6} gap={3}>
         <Grid>
-          <Progress value={90} color='warning' />
+          <Progress value={((currentQuestionIdx + 1) / 12) * 100} color='warning' />
         </Grid>
       </Grid.Container>
       <p>{currentQuestion.question}</p>
@@ -63,12 +65,11 @@ const QuestionPage: React.FC = () => {
           </li>
         ))}
       </ul>
-    </div>
+      {currentQuestionIdx === 11 ? (
+        <button onClick={handleResultPageRedirect}>결과보러가기</button>
+      ) : null}
+    </>
   );
 };
 
 export default QuestionPage;
-
-// 문제 끝났을 경우 -> ResultPage 보여주기 아니면 OR 마지막 문제일경우 결과보러가기 버튼 추가해줘서 result 페이지로 이동
-
-// 문제 진척율? 상태바 보여주기
