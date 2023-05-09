@@ -57,14 +57,16 @@ const QuestionPage: React.FC = () => {
           <Progress value={((currentQuestionIdx + 1) / 12) * 100} color='warning' />
         </Grid>
       </Grid.Container>
-      <p>{currentQuestion.question}</p>
-      <ul>
-        {currentQuestion.options.map((option) => (
-          <li key={option} onClick={() => handleAnswerSelection(option)}>
-            {option}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <p onClick={(e) => e.stopPropagation()}>{currentQuestion.question}</p>
+        <ul>
+          {currentQuestion.options.map((option) => (
+            <li key={option}>
+              <button onClick={() => handleAnswerSelection(option)}>{option}</button>
+            </li>
+          ))}
+        </ul>
+      </div>
       {currentQuestionIdx === 11 ? (
         <button onClick={handleResultPageRedirect}>결과보러가기</button>
       ) : null}
