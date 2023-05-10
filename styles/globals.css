@@ -11,16 +11,16 @@ body {
   font-size: 10px;
 }
 
-/* button {
-  background: inherit;
+button {
+  background: #f5a525;
   border: none;
   box-shadow: none;
-  border-radius: 0;
-  padding: 0;
+  border-radius: 20px;
+  padding: 10px 15px;
   overflow: visible;
   cursor: pointer;
   font: inherit;
-} */
+}
 a {
   color: #fff;
   text-decoration: none;
@@ -32,4 +32,8 @@ a {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+ul {
+  list-style: none;
 }
