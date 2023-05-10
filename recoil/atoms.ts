@@ -13,7 +13,7 @@ export const selectedAnswerAtom = atom<string[]>({
 // });
 
 // 사용자 이름을 나타내는 atom
-// export const usernameAtom = atom<string>({
-//   key: 'username',
-//   default: '',
-// });
+export const usernameAtom = atom<string>({
+  key: 'username',
+  default: '',
+});

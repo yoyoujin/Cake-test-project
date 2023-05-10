@@ -1,9 +1,11 @@
+import { usernameAtom } from '@/recoil/atoms';
 import Router, { useRouter } from 'next/router';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styles from './index.module.css';
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState('');
+  const [username, setUsername] = useRecoilState(usernameAtom);
   const [error, setError] = useState('');
   const router = useRouter();
 
@@ -11,7 +13,7 @@ export default function Home() {
     router.push('/question');
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
     if (value.length >= 3) {
@@ -20,11 +22,11 @@ export default function Home() {
       setError('입력값에는 한글이 포함될 수 없습니다 🥹');
     } else {
       setError('');
-      setInputValue(value);
+      setUsername(value);
     }
   };
 
-  console.log(inputValue);
+  console.log(username);
   return (
     <div className={styles.wrapper}>
       <h1>Start!</h1>
@@ -34,7 +36,7 @@ export default function Home() {
           id='username'
           type='text'
           placeholder='영문 2글자를 입력해주세요'
-          value={inputValue}
+          value={username}
           onChange={handleInputChange}
         />
       </label>
