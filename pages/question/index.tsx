@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import { selectedAnswerAtom } from '@/recoil/atoms';
 import Router, { useRouter } from 'next/router';
 import { Progress, Grid } from '@nextui-org/react';
+import styles from './index.module.css';
 
 interface Question {
   id: number;
@@ -18,8 +19,13 @@ const QuestionPage: React.FC = () => {
   const currentQuestion = questions[currentQuestionIdx];
   const router = useRouter();
 
-  const handleAnswerSelection = (selectedOption: string) => {
-    setSelectedAnswer([...selectedAnswer, selectedOption]);
+  const handleAnswerSelection = (
+    selectedOption: string,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    if (selectedAnswer.length < 12) {
+      setSelectedAnswer([...selectedAnswer, selectedOption]);
+    }
     if (currentQuestionIdx < 11) {
       setCurrentQuestionIdx((prevIndex) => prevIndex + 1);
     }
@@ -52,17 +58,25 @@ const QuestionPage: React.FC = () => {
 
   return (
     <>
-      <Grid.Container xs={10} sm={6} gap={3}>
-        <Grid>
-          <Progress value={((currentQuestionIdx + 1) / 12) * 100} color='warning' />
-        </Grid>
-      </Grid.Container>
-      <div>
-        <p onClick={(e) => e.stopPropagation()}>{currentQuestion.question}</p>
+      <div className={styles.progressbar}>
+        <Grid.Container xs={12} sm={6} gap={3}>
+          <Grid>
+            <Progress value={((currentQuestionIdx + 1) / 12) * 100} color='warning' />
+          </Grid>
+        </Grid.Container>
+      </div>
+
+      <div className={styles.questionWrapper}>
+        <p>{currentQuestion.question}</p>
         <ul>
           {currentQuestion.options.map((option) => (
             <li key={option}>
-              <button onClick={() => handleAnswerSelection(option)}>{option}</button>
+              <button
+                className={styles.button}
+                onClick={(event) => handleAnswerSelection(option, event)}
+              >
+                {option}
+              </button>
             </li>
           ))}
         </ul>
