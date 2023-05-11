@@ -8,7 +8,12 @@ import styles from './index.module.css';
 interface Question {
   id: number;
   question: string;
-  options: string[];
+  options: Option[];
+}
+
+interface Option {
+  type: string;
+  option: string;
 }
 
 const QuestionPage: React.FC = () => {
@@ -70,12 +75,12 @@ const QuestionPage: React.FC = () => {
         <p>{currentQuestion.question}</p>
         <ul>
           {currentQuestion.options.map((option) => (
-            <li key={option}>
+            <li key={option.option}>
               <button
                 className={styles.button}
-                onClick={(event) => handleAnswerSelection(option, event)}
+                onClick={(event) => handleAnswerSelection(option.option, event)}
               >
-                {option}
+                {option.option}
               </button>
             </li>
           ))}
