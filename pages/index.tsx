@@ -26,7 +26,6 @@ export default function Home() {
     }
   };
 
-  console.log(username);
   return (
     <div className={styles.wrapper}>
       <h1>Start!</h1>
